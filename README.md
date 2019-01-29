@@ -58,7 +58,7 @@ Options: -h       display this help message
 
 * VAMP_database.pl
 ```
-Usage:   perl VAMP_database.pl [options] KEGG_orthology.txt
+Usage:   perl VAMP_database.pl [options] [KEGG_orthology.txt]
 
 Options: -h       display this help message
          -r       redownload data
@@ -140,11 +140,41 @@ Options: -h       display this help message
 
 * VAMP_predict.pl
 ```
-Usage:   perl VAMP_predict.pl [options] VAMP_model.RData sample=VAMP.txt [...]
+Usage:   perl VAMP_predict.pl [options] VAMP_model.RData [sample=]VAMP.txt [...]
 
 Options: -h       display this help message
          -c       cluster only
          -o       orthology only
          -p STR   phenotype
          -i FILE  image file
+```
+
+
+## Example
+
+1. Download an example input genome FASTA file
+```
+wget http://cdc-test.biohpc.swmed.edu/VAMPr/example/Klebsiella_pneumoniae_MGH_43.fasta
+```
+
+2. Download VAMPr protein database
+```
+perl VAMP_database.pl
+```
+
+3. Identify AMR genotypes
+```
+perl VAMP.pl Klebsiella_pneumoniae_MGH_43.fasta > Klebsiella_pneumoniae_MGH_43.VAMP.txt
+```
+
+4. Download VAMPr prediction model - you can find the download links in http://cdc-test.biohpc.swmed.edu/VAMPr/VAMPr.cgi?show=model
+```
+wget http://cdc-test.biohpc.swmed.edu/VAMPr/VAMP_model/573.amikacin.VAMP_model.RData
+wget http://cdc-test.biohpc.swmed.edu/VAMPr/VAMP_model/573.cefepime.VAMP_model.RData
+```
+
+5. Predict AMR phenotypes
+```
+perl VAMP_predict.pl 573.amikacin.VAMP_model.RData amikacin=Klebsiella_pneumoniae_MGH_43.VAMP.txt
+perl VAMP_predict.pl 573.cefepime.VAMP_model.RData cefepime=Klebsiella_pneumoniae_MGH_43.VAMP.txt
 ```
