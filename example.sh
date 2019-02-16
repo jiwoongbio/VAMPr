@@ -1,3 +1,5 @@
+#!/bin/env bash
+
 # 1. Download an example input genome FASTA file
 wget http://share.zhanxw.com/VAMPr/example/Klebsiella_pneumoniae_MGH_43.fasta
 
