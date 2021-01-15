@@ -20,7 +20,7 @@ my %aaTypeHash = (
 my $dataPath = "$vampPath/VAMP_data";
 system("mkdir -p $dataPath");
 
-my $vampURL = 'http://share.zhanxw.com/VAMPr';
+my $vampURL = 'https://cdc.biohpc.swmed.edu/VAMPr';
 my $dataURL = "$vampURL/VAMP_data";
 
 my @additionalOrthologyProteinSequenceFileList = ();
@@ -337,12 +337,12 @@ if(defined($orthologyFile)) {
 	{
 		my $URL = "$dataURL/protein.fasta";
 		my $file = "$dataPath/protein.fasta";
-		system("wget --no-verbose -O $file $URL") if(not -r $file or $redownload);
+		system("wget --no-check-certificate --no-verbose -O $file $URL") if(not -r $file or $redownload);
 	}
 	{
 		my $URL = "$dataURL/cluster.fasta";
 		my $file = "$dataPath/cluster.fasta";
-		system("wget --no-verbose -O $file $URL") if(not -r $file or $redownload);
+		system("wget --no-check-certificate --no-verbose -O $file $URL") if(not -r $file or $redownload);
 	}
 }
 system("diamond makedb --db $dataPath/protein.dmnd --in $dataPath/protein.fasta");
